@@ -9,8 +9,9 @@ namespace Operátorok
     {
         static void Main(string[] args)
         {
-            var equations = OpenFile(@"E:\programozás\kifejezesek.txt");
-            bool condition = true;
+            var equations = OpenFile(@".\src\kifejezesek.txt");
+
+
             Console.WriteLine("2. Feladat!");
             Console.WriteLine(equations.Count);
 
@@ -18,7 +19,7 @@ namespace Operátorok
             Console.WriteLine(equations.Where(x=>x.Operator=="mod").Count());
 
             Console.WriteLine("4. Feladat!");
-            if (equations.First(x => x.FisrtValue%10==0 && x.SecondValue % 10 == 0)!=null) Console.WriteLine("Van ilyen kifejezés");
+            if (equations.First(x => x.FirstValue % 10==0 && x.SecondValue % 10 == 0)!=null) Console.WriteLine("Van ilyen kifejezés");
 
             Console.WriteLine("5. Feladat!");
             Console.WriteLine("\tmod \t-> " + equations.Where(x => x.Operator == "mod").Count());
@@ -29,7 +30,7 @@ namespace Operátorok
             Console.WriteLine("\t+ \t-> " + equations.Where(x => x.Operator == "+").Count());
 
             Console.WriteLine("7. Feladat!");
-            while (condition)
+            while (true)
             {
                 var inpute = Console.ReadLine();
                 if (inpute=="vége")
@@ -48,13 +49,13 @@ namespace Operátorok
             }
 
             Console.WriteLine("8. Feladat!");
-            SaveFile(equations, @"E:\programozás\eredmények.txt");
+            SaveFile(equations, @".\src\eredmények.txt");
             Console.WriteLine("eredmények.txt");
         }
         public static void SaveFile(List<Equation> equations, string path)
         {
-            var reader = new StreamWriter(path);
-            equations.ForEach(x => reader.WriteLine(x.Result));
+            var writer = new StreamWriter(path);
+            equations.ForEach(x => writer.WriteLine(x.Result));
         }
         public static List<Equation> OpenFile(string path)
         {
