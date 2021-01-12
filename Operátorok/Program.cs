@@ -13,7 +13,7 @@ namespace Operátorok
 
 
             Console.WriteLine("2. Feladat!");
-            Console.WriteLine(equations.Count);
+            Console.WriteLine(equations.Count());
 
             Console.WriteLine("3. Feladat!");
             Console.WriteLine(equations.Where(x=>x.Operator=="mod").Count());
@@ -55,7 +55,7 @@ namespace Operátorok
         public static void SaveFile(List<Equation> equations, string path)
         {
             var writer = new StreamWriter(path);
-            equations.ForEach(x => writer.WriteLine(x.Result));
+            equations.ForEach(x => writer.WriteLine(x.FirstValue + " " + x.Operator + " " + x.SecondValue + " = " + x.Result));
         }
         public static List<Equation> OpenFile(string path)
         {
@@ -71,25 +71,25 @@ namespace Operátorok
 
             return equations;
         }
-        public static string SolveEquation(int FirstValue, string Operator, int SecondValue)
+        public static string SolveEquation(double firstValue, string @operator, double secondValue)
         {
-            switch (Operator)
+            switch (@operator)
             {
                 case "+":
-                    return (FirstValue + SecondValue).ToString();
+                    return (firstValue + secondValue).ToString();
                 case "-":
-                    return (FirstValue - SecondValue).ToString();
+                    return (firstValue - secondValue).ToString();
                 case "*":
-                    return (FirstValue * SecondValue).ToString();
+                    return (firstValue * secondValue).ToString();
                 case "/":
-                    if (SecondValue == 0) return "Egyéb hiba!";
-                    return (FirstValue / SecondValue).ToString();
+                    if (secondValue == 0) return "Egyéb hiba!";
+                    return (firstValue / secondValue).ToString();
                 case "mod":
-                    if (SecondValue == 0) return "Egyéb hiba!";
-                    return (FirstValue % SecondValue).ToString();
+                    if (secondValue == 0) return "Egyéb hiba!";
+                    return (firstValue % secondValue).ToString();
                 case "div":
-                    if (SecondValue == 0) return "Egyéb hiba!";
-                    return (FirstValue / SecondValue).ToString();
+                    if (secondValue == 0) return "Egyéb hiba!";
+                    return Convert.ToInt16(firstValue / secondValue).ToString();
                 default:
                     return "Hibás Operátor";
             }
