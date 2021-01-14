@@ -56,6 +56,7 @@ namespace Operátorok
         {
             var writer = new StreamWriter(path);
             equations.ForEach(x => writer.WriteLine(x.FirstValue + " " + x.Operator + " " + x.SecondValue + " = " + x.Result));
+            writer.Close();
         }
         public static List<Equation> OpenFile(string path)
         {
@@ -68,6 +69,7 @@ namespace Operátorok
                 var equation = new Equation(int.Parse(separatedLine[0]), separatedLine[1], int.Parse(separatedLine[2]), SolveEquation(int.Parse(separatedLine[0]), separatedLine[1], int.Parse(separatedLine[2])));
                 equations.Add(equation);
             }
+            reader.Close();
 
             return equations;
         }
